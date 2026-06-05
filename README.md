@@ -2,7 +2,7 @@
 
 ## Project Overview
 <pre>
-<b>Project:</b>   TA Careers
+<b>Project:</b>   TAIT Careers
 <b>Role:</b>      UI/UX Designer & UI Developer
 <b>Tools:</b>     Figma, Liquid, HTML5, CSS3, JS/jQuery, Foundation
 </pre>
