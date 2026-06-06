@@ -1,5 +1,3 @@
-<p><a href="https://careers.taittowers.com/"><img src="https://doylesee.github.io/tait-cws/thumbnail.jpg" /></a></p>
-
 ## Project Overview
 <pre>
 <b>Project:</b>   TAIT Careers
@@ -8,6 +6,7 @@
 </pre>
 &nbsp;<strong><a href="https://careers.taittowers.com/">View project</a></strong>
 
+<p><a href="https://careers.taittowers.com/"><img src="https://doylesee.github.io/tait-cws/thumbnail.jpg" /></a></p>
 <br />
 
 ## The Challenge
