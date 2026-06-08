@@ -4,9 +4,9 @@
 <b>Role:</b>      UI/UX Designer & UI Developer
 <b>Tools:</b>     Figma, Liquid, HTML5, CSS3, JS/jQuery, Foundation
 </pre>
-&nbsp;<strong><a href="https://careers.taittowers.com/">View project</a></strong>
+&nbsp;<strong><a href="https://careers.taittowers.com/" rel="noopener noreferrer">View project</a></strong>
 
-<p><a href="https://careers.taittowers.com/"><img src="https://doylesee.github.io/tait-cws/thumbnail.jpg" /></a></p>
+<p><a href="https://careers.taittowers.com/" rel="noopener noreferrer"><img src="https://doylesee.github.io/tait-cws/thumbnail.jpg" /></a></p>
 <br />
 
 ## The Challenge
@@ -37,4 +37,4 @@ As always, while prioritizing these rich aesthetic enhancements, I ensured the e
 ## Results & Impact
 This project is a personal favorite because it showcases how structural template limitations don't have to compromise artistic vision. By turning a bare-bones template into a cool and interactive web experience, I delivered a career portal that looks and feels like a seamless extension of TAIT's core digital presence. The final product successfully captured the company’s cutting-edge brand identity while giving potential applicants an engaging, beautiful, and accessible platform to explore career opportunities.
 
-<br /><strong><a href="https://careers.taittowers.com/">View project</a></strong>
+<br /><strong><a href="https://careers.taittowers.com/" rel="noopener noreferrer">View project</a></strong>
