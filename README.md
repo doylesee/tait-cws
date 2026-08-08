@@ -5,8 +5,12 @@
 <b>Tools:</b>     Figma, Liquid, HTML5, CSS3, JS/jQuery, Foundation
 </pre>
 &nbsp;<strong><a href="https://careers.taittowers.com/" rel="noopener noreferrer">View project</a></strong>
+<br /><br />
 
-<p><a href="https://careers.taittowers.com/" rel="noopener noreferrer"><img src="https://doylesee.github.io/tait-cws/thumbnail.jpg" /></a></p>
+### Table of Contents
+* [The Challenge](#the-challenge)
+* [My Approach & Implementation](#my-approach--implementation)
+* [Results & Impact](#results--impact)
 <br />
 
 ## The Challenge
