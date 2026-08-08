@@ -4,13 +4,12 @@
 <b>Role:</b>      UI/UX Designer & UI Developer
 <b>Tools:</b>     Figma, Liquid, HTML5, CSS3, JS/jQuery, Foundation
 </pre>
-&nbsp;<strong><a href="https://careers.taittowers.com/" rel="noopener noreferrer">View project</a></strong>
-<br /><br />
 
 ### Table of Contents
 * [The Challenge](#the-challenge)
 * [My Approach & Implementation](#my-approach--implementation)
 * [Results & Impact](#results--impact)
+* [View Project](https://careers.taittowers.com/)
 <br />
 
 ## The Challenge
