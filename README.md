@@ -12,6 +12,10 @@
 * [View Project](https://careers.taittowers.com/)
 <br />
 
+<a href="https://careers.taittowers.com">
+  <img src="screenshot.jpg" alt="" width="100%">
+</a>
+
 ## The Challenge
 The goal was to build a clean, focused two-page career site (Job Search and Job Detail pages) for TAIT. Because the project scope was structurally simple, the client did not have custom design mockups available and initially looked to rely on a generic, bare-bones template.
 
