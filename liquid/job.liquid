@@ -1,0 +1,279 @@
+{% comment %}
+DO NOT EDIT THIS!
+UPDATE THE CORRESPONDING THEME INSTEAD!
+THEME CAN BE FOUND AT Career Sites > Theme Manager > TAIT Theme
+
+ONCE THEME HAS BEEN UPDATED, RE-APPLY IT TO ALL APPLICABLE SITES
+{% endcomment %}
+
+{% include '_config__reusable-texts' %}
+{% include '/_config__variables' %}
+
+{% page_required_header %}
+
+{% unless root_url contains 'ttcportals.com' or root_url contains 'internal' or root_url contains 'agency' %}
+    {% if job.active? and is_referral_page != 'true' %}
+        <script type="application/ld+json">
+            {
+                "@context" : "http://schema.org/",
+                "@type" : "JobPosting",
+                "title" : "{{ job.title | escape_javascript }}",
+                "description" : "{{ job.description | escape_javascript | replace: "\'","'" | replace: "\$","$" }}",
+                "identifier": {
+                    "@type": "PropertyValue",
+                    "name": "{{ company_name }}",
+                    "value": "{{ job.external_id }}"
+                },
+                "hiringOrganization" : {
+                    "@type" : "Organization",
+                    "name" : "{{ company_name }}",
+                    "logo" : "{{ root_url }}system/production/assets/442644/original/tait__icon.png"
+                },
+                "jobLocation" : {
+                    "@type" : "Place",
+                    "address" : {
+                        "@type" : "PostalAddress",
+                        "streetAddress" : "{{ job.location.street | escape_javascript }}",
+                        "addressLocality" : "{{ job.location.city | escape_javascript }}",
+                        "addressRegion" : "{{ job.location.state_prov | escape_javascript }}",
+                        "postalCode" : "{{ job.location.postal_code | escape_javascript }}",
+                        "addressCountry": "{{ job.location.country | escape_javascript }}"
+                    }
+                },
+                "datePosted" : "{{ job.created_at | date: "%Y-%m-%d" }}",
+                "employmentType": "{{ job.cfdisplay_JobType }}",
+                "directApply": true
+            }
+        </script>
+    {% endif %}
+{% endunless %}
+
+{% if is_job_details == 'false' %}
+    {% unless job.active? %}
+        {% redirect_temporary '/search/jobs?ns_inactive_job=1' %}
+    {% endunless %}
+{% endif %}
+
+<div id="header-wrapper-fixed-bottom"></div>
+
+<div id="job-details">
+    <div class="job-details-preloader-js preloader preloader--job">
+        <div class="facet-job-loading hide-for-print" role="alert" aria-labelledby="facet-job-loading">
+            <div class="show-for-sr"><label id="facet-jobs-loading">{{ text_loading_job }}</label></div>
+        </div>
+    </div>
+
+    <div class="job-details-inner-js">
+        <div class="job-details__heading padded-v-small">
+            <div class="row similar-jobs-element-js row--small--no-similar-jobs-js">
+                <div class="columns padded-v-small job-details__heading-back copy-content">
+                    <a href="/{{ current_locale.locale }}/search/jobs" class="js" id="back-to-search" rel="nofollow">{{ text_back_to_search_results }}</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="padded-v-large">
+            <div class="row similar-jobs-element-js row--small--no-similar-jobs-js">
+                <div class="columns similar-jobs-element-js medium-8--has-similar-jobs-js large-9--has-similar-jobs-js xlarge-8--has-similar-jobs-js job-details__main">
+                    <section>
+                        <div class="row">
+                            <div class="columns">
+                                <h1 class="heading-2">{{ job.title | html_safe }}</h1>
+                            </div>
+                            <div class="columns similar-jobs-element-js large-6--has-similar-jobs-js medium-6--no-similar-jobs-js">
+                                {% unless job.active? %}
+                                    {{ text_inactive_job }}
+                                {% endunless %}
+                                {% if notice %}
+                                    <p>{{ notice }}</p>
+                                {% endif %}
+                                <p>
+                                    {% capture job_location_state_prov_short_no_digit %}{{ job.location.state_prov_short | replace_global_regex: "[\d]", ":::" }}{% endcapture %}
+                                    {% if job_location_state_prov_short_no_digit contains ':::' %}
+                                        {% capture job_state_prov %}{{ job.location.state_prov }}{% endcapture %}
+                                    {% else %}
+                                        {% capture job_state_prov %}{{ job.location.state_prov_short }}{% endcapture %}
+                                    {% endif %}
+                                    {{ text_location }}: {{ job.location.city }}{% if job_state_prov != empty %}, {{ job_state_prov }}{% endif %}{% if job.location.country != empty %}, {{ job.location.country }}{% endif %}
+                                    {% if job.cfdisplay_WorkType != blank %}<br />{{ text_work_type }}: {{ job.cfdisplay_WorkType }}{% endif %}
+                                    {% if job.cfdisplay_JobdisplayID != blank %}<br />{{ text_job_id }}: {{ job.cfdisplay_JobdisplayID }}{% endif %}
+                                </p>
+                                <div class="padded-v-medium--- space-small">
+                                    <div class="cs_share_container cs_cfix clearfix">
+                                        <span class="cs_share_text">{{ text_share }}:</span>
+                                        <span class="cs_share_email"></span>
+                                        <span class="cs_share_twitter"></span>
+                                        <span class="cs_share_facebook"></span>
+                                        <span class="cs_share_linkedin"></span>
+                                    </div>
+                                </div>
+                                {% if is_job_details == 'true' %}
+                                    <div class="social-share-url branded-search space-small">
+                                        <input type="text" width="50" value="{{ job.default_career_site_referral_url }}" id="social-share-url__input-1-js">
+                                        <a href="javascript:void(0);" class="social-share-url__copy-js" rel="nofollow">{{ text_copy }}</a>
+                                        <span class="social-share-url__copied-js hide">{{ text_copied }}</span>
+                                        {% comment %}Copy to clipboard only works if the input is visible! If it needs to be hidden, position the input off-screen{% endcomment %}
+                                    </div>
+
+                                    <div class="space-medium">
+                                        {% if job.referral_incentive_amount != blank or job.referral_incentive_description != blank %}
+                                            <h2 class="heading-6 space-none">{{ text_referral_reward }}</h2>
+                                            <h3>
+                                                {% if job.referral_incentive_amount != blank %}
+                                                    {% if job.referral_incentive_currency == 'USD' or job.referral_incentive_currency == 'CAD' %}${% elsif job.referral_incentive_currency == 'EUR' %}€{% elsif job.referral_incentive_currency == 'GBP' %}£{% endif %}{{ job.referral_incentive_amount }} ({{ job.referral_incentive_currency }})
+                                                {% endif %}
+                                                {% if job.referral_incentive_description != blank %}{{ job.referral_incentive_description }}{% endif %}
+                                            </h3>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="columns similar-jobs-element-js large-6--has-similar-jobs-js large-text-right--has-similar-jobs-js medium-6--no-similar-jobs-js medium-text-right--no-similar-jobs-js">
+                                <div class="space-small">
+                                    <span id="apply-top" class="js branded-button-outer branded-button-1-outer">
+                                        {% if job.active? %}
+                                            {% if agency %}
+                                                {{ job | link_to_apply:text_submit_candidate, agency }}
+                                            {% else %}
+                                                {{ job | link_to_apply:text_apply_now }}
+                                            {% endif %}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="space-medium">
+                                    <a href="javascript:savejob();" class="branded-button-2 hide save-job" rel="nofollow">{{ text_save_job }}</a>
+                                    <a href="javascript:savejob();" class="branded-button-2 hide job-saved" rel="nofollow">{{ text_saved }}</a>
+                                    <script>
+                                        // Save Jobs functionality
+                                        var is_job_saved = false;
+                                        var job_index;
+                                        var job_saved_message;
+                                        var c_jobs_temp = localStorage.getItem('c_jobs_{{ current_locale.locale }}') ? JSON.parse(localStorage.getItem('c_jobs_{{ current_locale.locale }}')) : [];
+                                        var saved_jobs_query;
+
+                                        // Detecting if job has been saved
+                                        if (c_jobs_temp.indexOf('{{ job.external_id }}') >= 0) {
+                                            $('.job-saved').removeClass('hide');
+                                            is_job_saved = true;
+                                            job_index = c_jobs_temp.indexOf('{{ job.external_id }}');
+                                            $('.saved-jobs-alert__check').toggleClass('removed');
+                                        }
+                                        else {
+                                            is_job_saved = false;
+                                            $('.save-job').removeClass('hide');
+                                        }
+
+                                        function savejob() {
+                                            {% if params['savejob'] == blank %}
+                                                {% capture job_url_save %}{{ job.url }}{% if request_fullpath contains '?' %}&{% else %}?{% endif %}savejob=1{% endcapture %}
+                                                window.location.replace('{{ job_url_save }}'); 
+                                            {% endif %}
+                                        }
+                                        {% if params['savejob'] == '1' %}
+                                            var job_item;
+                                            if (is_job_saved == true) {
+                                                is_job_saved = false;
+                                                c_jobs_temp.splice(job_index,1);
+                                                $('.saved-jobs-alert__check').toggleClass('removed');
+                                                $('.saved-jobs-alert__message').html('{{ text_job_has_been_removed }}');
+                                            }
+                                            else {
+                                                is_job_saved = true;
+                                                c_jobs_temp.push('{{ job.external_id }}');
+                                                $('.saved-jobs-alert__check').toggleClass('removed');
+                                                $('.saved-jobs-alert__message').html('{{ text_job_has_been_saved }}');
+                                            }
+
+                                            localStorage.setItem('c_jobs_{{ current_locale.locale }}', JSON.stringify(c_jobs_temp));
+                                            
+                                            $('.saved-jobs-alert-wrapper').fadeIn();
+                                            setTimeout(function() {
+                                                $('.button-saved').html('{{ text_saved }}');
+                                                $('.saved-jobs-alert-wrapper').fadeOut();
+
+                                                {% if request_fullpath contains '?savejob=1' %}
+                                                    {% capture savejob_params %}?savejob=1{% endcapture %}
+                                                {% else %}
+                                                    {% capture savejob_params %}&savejob=1{% endcapture %}
+                                                {% endif %}
+                                                {% capture job_url_saved %}{{ request_fullpath | remove: savejob_params }}{% endcapture %}
+                                                //location.reload();
+                                                window.location.replace('{{ job_url_saved }}');
+                                            }, 2000);
+                                        {% endif %}
+                                    </script>
+                                </div>
+
+                                {% if is_job_details == 'true' %}
+                                    <div id="refer-top" class="js branded-button-outer branded-button-1-outer space-small">
+                                        {{ job | link_to_referral:text_refer_a_friend }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="job-description padded-v-medium space-medium">
+                            {{ job.description }}
+                        </div>
+
+                        <div class="row">
+                            <div class="columns similar-jobs-element-js large-6--has-similar-jobs-js medium-6--no-similar-jobs-js">
+                                <div class="padded-v-medium---">
+                                    <div class="cs_share_container cs_cfix clearfix space-small">
+                                        <span class="cs_share_text">{{ text_share }}:</span>
+                                        <span class="cs_share_email"></span>
+                                        <span class="cs_share_twitter"></span>
+                                        <span class="cs_share_facebook"></span>
+                                        <span class="cs_share_linkedin"></span>
+                                        {% if is_job_details == 'true' %}
+                                            <script type="text/javascript">CareerSite.Share.init({url: "{{job.default_career_site_referral_url}}"})</script>
+                                        {% else %}
+                                            <script type="text/javascript">talemetry.share();</script>
+                                        {% endif %}
+                                    </div>
+                                    {% if is_job_details == 'true' %}
+                                        <div class="social-share-url branded-search space-small">
+                                            <input type="text" width="50" value="{{ job.default_career_site_referral_url }}" id="social-share-url__input-2-js">
+                                            <a href="javascript:void(0);" class="social-share-url__copy-js" rel="nofollow">{{ text_copy }}</a>
+                                            <span class="social-share-url__copied-js hide">{{ text_copied }}</span>
+                                            {% comment %}Copy to clipboard only works if the input is visible! If it needs to be hidden, position the input off-screen{% endcomment %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="columns similar-jobs-element-js large-6--has-similar-jobs-js large-text-right--has-similar-jobs-js medium-6--no-similar-jobs-js medium-text-right--no-similar-jobs-js">
+                                {% if job.active? %}
+                                    {% if agency %}
+                                        <a href="javascript:void(0);" class="apply-bottom js branded-button-1 space-large">{{ text_submit_candidate }}</a>
+                                    {% else %}
+                                        <a href="javascript:void(0);" class="apply-bottom js branded-button-1 space-large">{{ text_apply_now }}</a>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </section>
+                </div><!--close .job-details__main-->
+
+                <div class="similar-jobs-element-js hide columns medium-4 large-3 xlarge-offset-1 job-details__sidebar">
+                    <aside>
+                        <div class="job-details__similar-jobs page-section">
+                            <h2 class="heading-3 space-small">{{ text_similar_jobs }}</h2>
+                            <div class="similar-jobs--job-js"></div>
+                            {% capture similar_jobs_query %}q={{ job.title | html_safe }}&location={{ job.location.city }}, {{ job.location.state_prov_short }}, {{ job.location.country }}{% endcapture %}
+                            {% capture similar_jobs_url %}{{ root_url }}search/jobs/?{{ similar_jobs_query }}&per_page=4&ns_job_id={{ job.id }}&ns_similar_jobs=1{% endcapture %}
+                            <script>
+                                // Ajax load similar jobs
+                                ajaxloadjobs('{{ similar_jobs_url }}',function() {
+                                    loadjob();
+                                });
+                            </script>
+                        </div><!--close .job-details__similar-jobs-->
+                    </aside>
+                </div><!--close .job-details__sidebar-->
+            </div>
+        </div>
+    </div><!--close .job-details-inner-js-->
+
+</div><!--close #job-details-->
+      
+{% page_required_footer %}

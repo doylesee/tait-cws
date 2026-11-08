@@ -1,0 +1,40 @@
+{% comment %}
+DO NOT EDIT THIS!
+UPDATE THE CORRESPONDING THEME INSTEAD!
+THEME CAN BE FOUND AT Career Sites > Theme Manager > TAIT Theme
+
+ONCE THEME HAS BEEN UPDATED, RE-APPLY IT TO ALL APPLICABLE SITES
+{% endcomment %}
+
+{% include '_config__reusable-texts' %}
+{% include '/_config__variables' %}
+
+{% page_required_header %}
+
+<div id="header-wrapper-fixed-bottom"></div>
+
+<div class="page-details-wrapper">
+    <div class="padded-v-xlarge">
+        <div class="row row--small">
+            <div class="columns{% if has_sidebar == 'true' %} medium-8 large-9{% endif %}">
+                <div class="page-details">
+                    <div class="row">
+                        <div class="column copy-content">
+                            {% capture include_name %}{{ site_type }}__{{ page.permalink }}{% endcapture %}
+                            {% include '/_config__include-logic' %}
+
+                            <h1 class="heading-2 space-medium">{% if page_title != blank %}{{ page_title }}{% else %}{{ page.title | html_safe }}{% endif %}</h1>
+                            {% if page_content != blank %}
+                                {{ page_content }}
+                            {% else %}
+                                {{ page.content }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div><!--close .page-details-->
+            </div>
+        </div>
+    </div>
+</div><!--close .page-details-wrapper-->
+            
+{% page_required_footer %}
